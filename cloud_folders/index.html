@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Insurance Fraud Detection</title>
+    <style>
+        body {
+            font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(120deg, #e0f7fa, #f1f8ff);
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            width: 450px;
+            margin: 50px auto;
+            background: #ffffff;
+            padding: 25px 30px;
+            border-radius: 12px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+
+        h1 {
+            text-align: center;
+            color: #0a3d62;
+            margin-bottom: 20px;
+        }
+
+        label {
+            font-weight: 600;
+            display: block;
+            margin-top: 12px;
+            color: #333;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 8px 10px;
+            margin-top: 6px;
+            border-radius: 6px;
+            border: 1px solid #ccc;
+            font-size: 14px;
+        }
+
+        input:focus, select:focus {
+            outline: none;
+            border-color: #1e90ff;
+        }
+
+        button {
+            width: 100%;
+            margin-top: 20px;
+            padding: 10px;
+            font-size: 16px;
+            background: #1e90ff;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        button:hover {
+            background: #0a6ed1;
+        }
+
+        .result {
+            margin-top: 25px;
+            padding: 15px;
+            border-radius: 8px;
+            text-align: center;
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        .fraud {
+            background: #ffe6e6;
+            color: #c0392b;
+            border: 1px solid #c0392b;
+        }
+
+        .suspicious {
+            background: #fff6e0;
+            color: #d68910;
+            border: 1px solid #d68910;
+        }
+
+        .genuine {
+            background: #e8f8f5;
+            color: #117864;
+            border: 1px solid #117864;
+        }
+
+        .probability {
+            margin-top: 8px;
+            font-size: 14px;
+            font-weight: normal;
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 15px;
+            font-size: 12px;
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Insurance Fraud Detection</h1>
+
+    <form action="/predict" method="post">
+        <label>Claim Amount</label>
+        <input type="number" name="claim_amount" required>
+
+        <label>Policy Age (Months)</label>
+        <input type="number" name="policy_age" required>
+
+        <label>Claim Type</label>
+        <select name="claim_type" id="claim_type" required onchange="toggleSeverity()">
+            <option value="Accident">Accident</option>
+            <option value="Theft">Theft</option>
+            <option value="Fire">Fire</option>
+        </select>
+
+        <label>Accident Severity</label>
+        <select name="accident_severity" id="accident_severity" required>
+            <option value="Low">Low</option>
+            <option value="Medium">Medium</option>
+            <option value="High">High</option>
+        </select>
+
+        <label>Previous Claims</label>
+        <input type="number" name="previous_claims" required>
+
+        <label>Customer Age</label>
+        <input type="number" name="customer_age" required>
+
+        <label>Vehicle Age (years)</label>
+        <input type="number" name="vehicle_age" required>
+
+        <label>Claim Delay (days)</label>
+        <input type="number" name="claim_delay" required>
+
+        <button type="submit">Predict</button>
+    </form>
+
+    {% if prediction %}
+        <div class="result 
+            {% if 'Fraud' in prediction %}fraud
+            {% elif 'Suspicious' in prediction %}suspicious
+            {% else %}genuine{% endif %}">
+            {{ prediction }}
+            {% if probability %}
+                <div class="probability">
+                    Fraud Probability: {{ probability }}%
+                </div>
+            {% endif %}
+        </div>
+    {% endif %}
+
+    <footer>
+        AI-based Insurance Claim Fraud Detection System
+    </footer>
+</div>
+
+<script>
+    function toggleSeverity() {
+        const claimType = document.getElementById("claim_type").value;
+        const severity = document.getElementById("accident_severity");
+
+        if (claimType === "Accident") {
+            severity.disabled = false;
+            severity.required = true;
+        } else {
+            severity.disabled = true;
+            severity.required = false;
+            severity.value = "";
+        }
+    }
+
+    // Run once when page loads
+    window.onload = toggleSeverity;
+</script>
+
+</body>
+</html>
