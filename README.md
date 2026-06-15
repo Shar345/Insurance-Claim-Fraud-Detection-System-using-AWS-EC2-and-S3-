@@ -1,86 +1,86 @@
 # Insurance-Claim-Fraud-Detection-System-using-AWS-EC2-and-S3-
 
-STEPS OF AWS PROJECT
+STEPS OF AWS PROJECT<br>
 
---> launch Instance
---> use Ubuntu
---> 22.04LTS
---> use keypair fraud already generated
---> in security groups create
-SSH keep it as it is
-Custom TCP  TCP  5000  Anywhereipv4 0.0.0.0/0
-HTTP Anywhereipv4
+--> launch Instance<br>
+--> use Ubuntu<br>
+--> 22.04LTS<br>
+--> use keypair fraud already generated<br>
+--> in security groups create<br>
+SSH keep it as it is<br>
+Custom TCP  TCP  5000  Anywhereipv4 0.0.0.0/0<br>
+HTTP Anywhereipv4<br>
 
-###Store in S3
-1]Go to AWS Console
-2]Open S3
-3]Click Create Bucket
-4]Give name like: "insurance-fraud-predictions"
+###Store in S3<br>
+1]Go to AWS Console<br>
+2]Open S3<br>
+3]Click Create Bucket<br>
+4]Give name like: "insurance-fraud-predictions"<br>
 
-5]Keep region same as EC2
-Leave default settings → Create
-then go to IAM
+5]Keep region same as EC2<br>
+Leave default settings → Create<br>
+then go to IAM<br>
 
-###Attach IAM Role to EC2
-1]Go to IAM → Create Role
-2]Select:
-Trusted entity → EC2
+###Attach IAM Role to EC2<br>
+1]Go to IAM → Create Role<br>
+2]Select:<br>
+Trusted entity → EC2<br>
 
-3]Attach policy:
-AmazonS3FullAccess (for project/demo)
+3]Attach policy:<br>
+AmazonS3FullAccess (for project/demo)<br>
 
-4]Create role
-5]Go to EC2 → Instance → Actions → Security → Modify IAM Role
-Attach the created role
+4]Create role<br>
+5]Go to EC2 → Instance → Actions → Security → Modify IAM Role<br>
+Attach the created role<br>
 
-6]Now EC2 can upload to S3 without access keys.
+6]Now EC2 can upload to S3 without access keys.<br>
 
 
-##Commands
-sudo apt update && sudo apt upgrade -y (press tab then ok)
+##Commands<br>
+sudo apt update && sudo apt upgrade -y (press tab then ok)<br>
 
-sudo apt install python3 python3-pip python3-venv -y (press tab then ok)
+sudo apt install python3 python3-pip python3-venv -y (press tab then ok)<br>
 
-python3 --version (to verify)
+python3 --version (to verify)<br>
 
-pip3 --version (to verify)
+pip3 --version (to verify)<br>
 
-##create the project folder
-mkdir mycloudproject
+##create the project folder<br>
+mkdir mycloudproject<br>
 
-cd mycloudproject
+cd mycloudproject<br>
 
-nano model.py (paste model.py code inside it then ctrl O + enter to save then ctrl X to exit and return the terminal)
-python3 model.py (run this to create a pickle file and pip install pandas and scikit-learn)
+nano model.py (paste model.py code inside it then ctrl O + enter to save then ctrl X to exit and return the terminal)<br>
+python3 model.py (run this to create a pickle file and pip install pandas and scikit-learn)<br>
 
-nano app.py (paste app2.py code inside it then ctrl O + enter to save then ctrl X to exit and return the terminal)
+nano app.py (paste app2.py code inside it then ctrl O + enter to save then ctrl X to exit and return the terminal)<br>
 
-nano insurance.csv (paste your data here then ctrl O + enter to save then ctrl X to exit and return the terminal)
+nano insurance.csv (paste your data here then ctrl O + enter to save then ctrl X to exit and return the terminal)<br>
 
-mkdir templates
+mkdir templates<br>
 
-nano templates/index.html (paste your html code here then ctrl O + enter to save then ctrl X to exit and return the terminal)
+nano templates/index.html (paste your html code here then ctrl O + enter to save then ctrl X to exit and return the terminal)<br>
 
-ls (to see all files)
+ls (to see all files)<br>
 
-##Activate virtual environment
-python3 -m venv venv
+##Activate virtual environment<br>
+python3 -m venv venv<br>
 
-source venv/bin/activate
+source venv/bin/activate<br>
 
-pip install flask pandas numpy scikit-learn boto3
+pip install flask pandas numpy scikit-learn boto3<br>
 
-python app.py (run the flask app)
+python app.py (run the flask app)<br>
 
-##open another page <your_public_ip>:5000 then the page will open
+##open another page <your_public_ip>:5000 then the page will open<br>
 
 
 ##after that stop the instance then when you restart paste the code (Instance state = Running, Status checks = 2/2 passed)
-cd mycloudproject
+cd mycloudproject<br>
 
-ls
+ls<br>
 
-source venv/bin/activate
+source venv/bin/activate<br>
 
-python app.py (run the flask code)
+python app.py (run the flask code)<br>
 
