@@ -1,4 +1,4 @@
-# Insurance-Claim-Fraud-Detection-System-using-AWS-EC2-and-S3-
+# Insurance Claim Fraud Detection System using AWS EC2 and S3
 
 STEPS OF AWS PROJECT<br>
 
