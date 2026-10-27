@@ -11,7 +11,7 @@ app = Flask(__name__)
 with open("fraud_model.pkl", "rb") as f:
     model = pickle.load(f)
 
-print("✅ Model loaded successfully")
+print("Model loaded successfully")
 
 # S3 CONFIGURATION
 s3 = boto3.client("s3")
@@ -95,9 +95,9 @@ def predict():
             Body=json.dumps(prediction_data),
             ContentType="application/json"
         )
-        print("✅ Prediction saved to S3:", file_name)
+        print("Prediction saved to S3:", file_name)
     except Exception as e:
-        print("❌ Error uploading to S3:", str(e))
+        print("Error uploading to S3:", str(e))
 
     # Return result to frontend
     return render_template(
